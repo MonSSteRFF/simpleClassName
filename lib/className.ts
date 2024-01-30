@@ -46,4 +46,5 @@ const cn: t_cn = (...input) => {
   return input.flatMap(getResult).join(' ');
 };
 
-export {cn, exploreArray, exploreFunction, getArray, getResult, isExist};
+export {exploreArray, exploreFunction, getArray, getResult, isExist};
+export default cn;

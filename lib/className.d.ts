@@ -9,4 +9,5 @@ declare const exploreFunction: (i: InputFunction) => string[];
 declare const exploreArray: (i: InputArray) => string[];
 declare const getResult: (inputValue: allInput) => string[];
 declare const cn: t_cn;
-export { cn, exploreArray, exploreFunction, getArray, getResult, isExist };
+export { exploreArray, exploreFunction, getArray, getResult, isExist };
+export default cn;

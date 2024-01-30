@@ -1,3 +1,2 @@
-import { cn } from '@/className';
-export { cn };
+import cn from '@/className';
 export default cn;

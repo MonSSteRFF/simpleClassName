@@ -1,4 +1,5 @@
-import {cn, exploreArray, exploreFunction, getArray, getResult, isExist} from './className';
+import {exploreArray, exploreFunction, getArray, getResult, isExist} from './className';
+import cn from './className';
 
 describe('className.ts', () => {
   it('getArray should handle string and array input', () => {
