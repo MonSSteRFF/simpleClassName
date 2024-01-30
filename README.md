@@ -1,6 +1,7 @@
 # simpleClassName
 simple library for className in react/react-native applications
 
+[npm](https://www.npmjs.com/package/simple-class-name)
 
 # LICENSE
 
