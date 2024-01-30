@@ -1,0 +1,36 @@
+{
+  "name": "simple-class-name",
+  "description": "simple library for cn func",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "homepage": "https://github.com/MonSSteRFF/simpleClassName",
+  "scripts": {
+    "pretest": "find . -name '*.d.ts' -o -name '*.js' | grep -v 'node_modules' | xargs rm -f",
+    "build": "npm run test && tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.2"
+  },
+  "author": {
+    "email": "MonsterLPchanel@gmail.com",
+    "name": "Vladislav"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "keywords": ["className", "simple", "css class"],
+  "bugs": {
+    "email": "MonsterLPchanel@gmail.com",
+    "url": "https://github.com/MonSSteRFF/simpleClassName/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": ""
+  }
+}

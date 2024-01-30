@@ -1,0 +1,12 @@
+type Input = string | undefined | null;
+type InputArray = Array<string | undefined | null | InputFunction | InputArray>;
+type InputFunction = () => InputArray | Input;
+type allInput = Input | InputArray | InputFunction | Array<Input | InputArray | InputFunction>;
+type t_cn = (...input: allInput[]) => string;
+declare const getArray: (i: string | string[]) => string[];
+declare const isExist: (i: Input) => string[];
+declare const exploreFunction: (i: InputFunction) => string[];
+declare const exploreArray: (i: InputArray) => string[];
+declare const getResult: (inputValue: allInput) => string[];
+declare const cn: t_cn;
+export { cn, exploreArray, exploreFunction, getArray, getResult, isExist };
