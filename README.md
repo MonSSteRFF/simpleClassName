@@ -2,7 +2,7 @@
 simple library for className in react/react-native applications\
 can use with javascript or typescript
 
-[npm](https://www.npmjs.com/package/simple-class-name)
+[npm](https://www.npmjs.com/package/simple-class-name)\
 [github](https://github.com/MonSSteRFF/simpleClassName)
 
 ## Install
