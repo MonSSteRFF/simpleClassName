@@ -1,7 +1,58 @@
 # simpleClassName
-simple library for className in react/react-native applications
+simple library for className in react/react-native applications\
+can use with javascript or typescript
 
 [npm](https://www.npmjs.com/package/simple-class-name)
+[github](https://github.com/MonSSteRFF/simpleClassName)
+
+## Install
+
+```bash
+npm i simple-class-name
+```
+and just use
+```js
+import cn from 'simple-class-name';
+```
+
+## Docs
+
+import the cn function from the library and use it in your react components\
+can be used with multiple params, arrays, functions, and included arrays
+
+##
+#### Example.scss
+```scss
+.testDiv {
+  background-color: green;
+  &.active{
+    background-color: red;
+  }
+}
+```
+
+##
+#### Example.tsx
+```js
+import styles from './Example.scss'
+import cn from "simple-class-name";
+
+const Example = () => {
+  const isActive = false // or another state
+  
+  return (
+    <>
+      <div className={cn(styles.testDiv)}></div>
+      <div className={cn(styles.testDiv, styles.active)}></div>
+      <div className={cn([styles.testDiv, styles.active])}></div>
+      <div className={cn(isActive ? [styles.testDiv, styles.active] : styles.testDiv)}></div>
+      <div className={cn(() => styles.testDiv)}></div>
+    </>
+  );
+};
+```
+
+
 
 # LICENSE
 
