@@ -18,7 +18,7 @@ import cn from 'simple-class-name';
 ## Docs
 
 import the cn function from the library and use it in your react components\
-can be used with multiple params, arrays, functions, and included arrays
+can be used with multiple params, arrays, functions, objects, and included arrays
 
 ##
 #### Example.scss
