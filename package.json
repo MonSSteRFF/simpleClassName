@@ -1,7 +1,7 @@
 {
   "name": "simple-class-name",
   "description": "simple library for cn func",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.ts",
   "homepage": "https://github.com/MonSSteRFF/simpleClassName",
   "scripts": {
