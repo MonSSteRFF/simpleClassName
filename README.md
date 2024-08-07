@@ -46,6 +46,7 @@ const Example = () => {
       <div className={cn(styles.testDiv, styles.active)}></div>
       <div className={cn([styles.testDiv, styles.active])}></div>
       <div className={cn(isActive ? [styles.testDiv, styles.active] : styles.testDiv)}></div>
+      <div className={cn({[styles.testDiv]: isActive, testClass: true})}></div>
       <div className={cn(() => styles.testDiv)}></div>
     </>
   );

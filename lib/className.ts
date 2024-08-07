@@ -1,50 +1,68 @@
 type Input = string | undefined | null;
-type InputArray = (string | undefined | null | InputFunction | InputArray)[];
-type InputFunction = () => InputArray | Input;
-type allInput = Input | InputArray | InputFunction | (Input | InputArray | InputFunction)[];
-type t_cn = (...input: allInput[]) => string;
+type InputObject = {[key: string]: boolean | unknown};
+type InputFunction = () => InputArray | Input | InputFunction;
+type InputArray = (string | undefined | null | InputFunction | InputArray | InputObject)[];
 
-const getArray = (i: string | string[]): string[] => (typeof i === 'string' ? [i] : i);
+type allInput = Input | InputArray | InputFunction | InputObject | (Input | InputFunction | InputObject)[];
+export type t_cn = (...input: allInput[]) => string;
 
-const isExist = (i: Input): string[] => (i === null || i === undefined || i === '' ? [] : getArray(i));
+class ClassName {
 
-const exploreFunction = (i: InputFunction): string[] => {
-  const result = i();
-  if (result === null || result === undefined) {
-    return [];
-  } else {
-    return getResult(result);
-  }
-};
+  private exploreString = (i: Input): string[] => (i === null || i === undefined || i === '' ? [] : [i]);
 
-const exploreArray = (i: InputArray): string[] => {
-  const res: string[] = [];
-  i.forEach((arrayItem) => {
-    getResult(arrayItem).forEach((item) => {
-      res.push(item);
+  private exploreFunction = (i: InputFunction): string[] => {
+    const result = i();
+    if (result === null || result === undefined) {
+      return [];
+    } else {
+      return this.getResult(result);
+    }
+  };
+
+  private exploreArray = (i: InputArray): string[] => {
+    const res: string[] = [];
+    i.forEach((arrayItem) => {
+      this.getResult(arrayItem).forEach((item) => {
+        res.push(item);
+      });
     });
-  });
-  return res;
-};
+    return res;
+  };
 
-const getResult = (inputValue: allInput): string[] => {
-  if (typeof inputValue === 'string') {
-    return isExist(inputValue);
+  private exploreObject = (i: InputObject): string[] => {
+    const result: string[] = [];
+
+    Object.keys(i).forEach(item => {
+      if (i[item]){
+        result.push(item);
+      }
+    })
+
+    return result;
   }
-  if (typeof inputValue === 'function') {
-    return exploreFunction(inputValue);
+
+  private getResult = (inputValue: allInput): string[] => {
+    if (typeof inputValue === 'string') {
+      return this.exploreString(inputValue);
+    }
+    if (typeof inputValue === 'function') {
+      return this.exploreFunction(inputValue);
+    }
+
+    if (Array.isArray(inputValue)) {
+      return this.exploreArray(inputValue);
+    }
+
+    if (typeof inputValue === 'object' && inputValue !== null) {
+      return this.exploreObject(inputValue);
+    }
+
+    return [];
   }
 
-  if (Array.isArray(inputValue)) {
-    return exploreArray(inputValue);
-  }
+  public cn: t_cn = (...input) => {
+    return input.flatMap(this.getResult).join(' ');
+  };
+}
 
-  return [];
-};
-
-const cn: t_cn = (...input) => {
-  return input.flatMap(getResult).join(' ');
-};
-
-export {exploreArray, exploreFunction, getArray, getResult, isExist};
-export default cn;
+export default ClassName;

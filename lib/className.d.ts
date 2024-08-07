@@ -1,13 +1,17 @@
 type Input = string | undefined | null;
-type InputArray = (string | undefined | null | InputFunction | InputArray)[];
-type InputFunction = () => InputArray | Input;
-type allInput = Input | InputArray | InputFunction | (Input | InputArray | InputFunction)[];
-type t_cn = (...input: allInput[]) => string;
-declare const getArray: (i: string | string[]) => string[];
-declare const isExist: (i: Input) => string[];
-declare const exploreFunction: (i: InputFunction) => string[];
-declare const exploreArray: (i: InputArray) => string[];
-declare const getResult: (inputValue: allInput) => string[];
-declare const cn: t_cn;
-export { exploreArray, exploreFunction, getArray, getResult, isExist };
-export default cn;
+type InputObject = {
+    [key: string]: boolean | unknown;
+};
+type InputFunction = () => InputArray | Input | InputFunction;
+type InputArray = (string | undefined | null | InputFunction | InputArray | InputObject)[];
+type allInput = Input | InputArray | InputFunction | InputObject | (Input | InputFunction | InputObject)[];
+export type t_cn = (...input: allInput[]) => string;
+declare class ClassName {
+    private exploreString;
+    private exploreFunction;
+    private exploreArray;
+    private exploreObject;
+    private getResult;
+    cn: t_cn;
+}
+export default ClassName;

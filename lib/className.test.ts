@@ -1,56 +1,49 @@
-import {exploreArray, exploreFunction, getArray, getResult, isExist} from './className';
-import cn from './className';
+import ClassName from './className';
+
+const className = new ClassName();
+const cn = className.cn;
+
 
 describe('className.ts', () => {
-  it('getArray should handle string and array input', () => {
-    expect(getArray('test')).toEqual(['test']);
-    expect(getArray(['test1', 'test2'])).toEqual(['test1', 'test2']);
-  });
-
-  it('isExist should handle null, undefined and empty string', () => {
-    expect(isExist(null)).toEqual([]);
-    expect(isExist(undefined)).toEqual([]);
-    expect(isExist('')).toEqual([]);
-    expect(isExist('test')).toEqual(['test']);
-  });
-
-  it('exploreFunction should handle function input', () => {
-    expect(exploreFunction(() => ['test1', 'test2'])).toEqual(['test1', 'test2']);
-  });
-
-  it('exploreArray should handle array input', () => {
-    expect(exploreArray(['test1', () => ['test2']])).toEqual(['test1', 'test2']);
-  });
-
-  it('getResult should handle all types of input', () => {
-    expect(getResult('test1')).toEqual(['test1']);
-    expect(getResult(['test2'])).toEqual(['test2']);
-    expect(getResult(() => ['test3'])).toEqual(['test3']);
-  });
-
   it('should handle string input', () => {
-    expect(cn('test')).toBe('test');
-  });
-
-  it('should handle array input', () => {
-    expect(cn(['test1', 'test2'])).toBe('test1 test2');
+    expect(cn('hello')).toBe('hello');
+    expect(cn('')).toBe('');
+    expect(cn(undefined)).toBe('');
+    expect(cn(null)).toBe('');
   });
 
   it('should handle function input', () => {
-    expect(cn(() => ['test1', 'test2'])).toBe('test1 test2');
+    expect(cn(() => 'hello')).toBe('hello');
+    expect(cn(() => '')).toBe('');
+    expect(cn(() => undefined)).toBe('');
+    expect(cn(() => null)).toBe('');
+    expect(cn(() => ['hello', 'world'])).toBe('hello world');
+    expect(cn(() => ['hello', null, 'world'])).toBe('hello world');
   });
 
-  it('should handle complex array input', () => {
-    expect(cn(['test1', () => ['test2']])).toBe('test1 test2');
+  it('should handle object input', () => {
+    expect(cn({a: true, b: false, c: true})).toBe('a c');
+    expect(cn({})).toBe('');
   });
 
-  it('should handle multiple inputs', () => {
-    expect(cn('test1', ['test2'], () => ['test3'])).toBe('test1 test2 test3');
+  it('should handle array input', () => {
+    expect(cn(['hello', undefined, 'world'])).toBe('hello world');
+    expect(cn([null, () => 'hello', {a: true}])).toBe('hello a');
+    expect(cn([['nested', 'array'], () => ['with', 'function']])).toBe('nested array with function');
   });
 
-  it('should handle null, undefined and empty string', () => {
-    expect(cn(null)).toBe('');
-    expect(cn(undefined)).toBe('');
-    expect(cn('')).toBe('');
+  it('should handle mixed input', () => {
+    expect(cn('hello', () => 'world', {a: true}, ['nested', {b: true, c: false}])).toBe('hello world a nested b');
+    expect(cn({a: true, b: false}, ['complex', () => 'function', {d: false, e: true}])).toBe('a complex function e');
+  });
+
+  it('should handle nested input', () => {
+    const nestedFunc = () => ['nested', {key: true}];
+    expect(cn(['level1', ['level2', nestedFunc]])).toBe('level1 level2 nested key');
+  });
+
+  it('should handle deep nested structures', () => {
+    const deepFunc = () => [() => 'deep', {deepKey: true}];
+    expect(cn([['very', ['deep', deepFunc]]])).toBe('very deep deep deepKey');
   });
 });
