@@ -7,10 +7,6 @@ type InputArray = (string | undefined | null | InputFunction | InputArray | Inpu
 type allInput = Input | InputArray | InputFunction | InputObject | (Input | InputFunction | InputObject)[];
 export type t_cn = (...input: allInput[]) => string;
 declare class ClassName {
-    private exploreString;
-    private exploreFunction;
-    private exploreArray;
-    private exploreObject;
     private getResult;
     cn: t_cn;
 }
